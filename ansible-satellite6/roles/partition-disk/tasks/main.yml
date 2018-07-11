@@ -1,0 +1,61 @@
+---
+
+- name: disk-free
+  shell: df -P /home | awk 'END{print $NF}'
+  register: disk_free
+  tags:
+  - skip_ansible_lint # "Commands should not change things if nothing needs doing" but this task changes nothing
+
+- name: debug
+  debug: msg="{{ disk_free.stdout }}"
+
+- block:
+  - name: group-name
+    shell: vgs --noheadings -o vg_name | tr -d '  '
+    register: vg
+
+  - name: debug-vg
+    debug: msg="{{ vg }}"
+
+  - name: unmount-home
+    mount:
+      path: /home
+      state: unmounted
+
+  - name: remove-logical-volume
+    lvol:
+      lv: /dev/"{{vg.stdout}}"/home
+      vg: "{{ vg.stdout }}"
+      state: absent
+      force: yes
+
+  - name: stream-editor3
+    lineinfile:
+      path: /etc/fstab
+      regexp: '^/.*/home'
+      state: absent
+
+  - name: mount-all
+    command: mount --all
+    args:
+      warn: no
+    tags:
+      - skip_ansible_lint # No mount all option in mount module
+
+  - name: resize-logical-volume
+    lvol:
+      lv: /dev/"{{vg.stdout}}"/root
+      vg: "{{ vg.stdout }}"
+      size: +100%FREE
+      force: yes
+      resizefs: yes
+
+  - name: kernel-release
+    command: uname -r
+    register: kernel
+
+  - name: increase-size
+    shell: xfs_growfs / && mount / -o inode64,remount
+    when: kernel.stdout.find('el6') == -1
+
+  when: disk_free.stdout == '/home'
