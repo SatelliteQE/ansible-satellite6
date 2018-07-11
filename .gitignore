@@ -53,5 +53,5 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
-# ansible-runner
-ansible_runner/artifacts/*
+# Ansible
+*.retry
