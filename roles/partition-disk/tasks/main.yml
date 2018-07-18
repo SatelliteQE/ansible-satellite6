@@ -1,0 +1,4 @@
+---
+# tasks file for partition-disk
+- include_tasks: remove_home_partition.yaml
+- include_tasks: extend_root_partition.yaml

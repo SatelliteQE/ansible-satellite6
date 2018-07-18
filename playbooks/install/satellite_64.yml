@@ -1,0 +1,4 @@
+---
+- hosts: sat64
+  roles:
+    - partition-disk
