@@ -1,0 +1,19 @@
+---
+- name: "Unmount /home partition"
+  mount:
+    name: /home
+    state: unmounted
+
+- name: "Remove /home entry from /etc/fstab"
+  mount:
+    name: /home
+    state: absent
+
+- name: "Remove /home Logical Volume"
+  when: item.key in "lv_home"
+  lvol:
+    vg: "{{ item.value.vg }}"
+    lv: "{{ item.key }}"
+    state: absent
+    force: true
+  with_dict: "{{ ansible_lvm.lvs }}"
