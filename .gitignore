@@ -6,6 +6,7 @@ log/
 logs-*/
 
 # Byte-compiled / optimized / DLL files
+rules/ansible-review/__pycache__
 __pycache__/
 venv/
 env/
@@ -52,10 +53,11 @@ coverage.xml
 .pydevproject
 .settings/
 
-
 # Sphinx documentation
 docs/_build/
 
 # Ansible
 *.retry
 
+# Galaxy Roles
+galaxy_roles/

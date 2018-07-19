@@ -8,9 +8,9 @@ Ansible playbooks for Satellite 6 systems' management.
 
 This repository will be Python3.6 based.
 
-You need Ansible installed. 
+You need Ansible 2.5.0+ installed.
 
-We also recommend to install ansible-lint and ansible-review.
+We also recommend to install yamllint, ansible-lint and ansible-review.
 
 ### Configuration
 
@@ -48,4 +48,7 @@ $ ansible-playbook -i inventory playbooks/install/satellite_63.yml
 ## Contributing
 
 Please read [CONTRIBUTING.md](https://github.com/SatelliteQE/ansible-satellite6/blob/master/CONTRIBUTING.md) if you wish to contribute.
- 
+
+## License
+
+ansible-satellite6 is licensed under [GPL version 3](https://github.com/SatelliteQE/ansible-satellite6/blob/master/LICENSE).
