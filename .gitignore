@@ -61,3 +61,6 @@ docs/_build/
 
 # Galaxy Roles
 galaxy_roles/
+
+# Variable samples
+vars/satellite_common.local.yml

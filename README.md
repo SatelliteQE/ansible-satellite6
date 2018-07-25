@@ -22,8 +22,13 @@ Befor running any Satellite6 playbooks,
    # ansible-galaxy install -r requirements.yml
    ```
 
-2. Check and configure required variables
+2. Check and configure required variables in `satellite_common.local.yml`
+   by first making a copy of it.
    (i.e RHSM Credentials, Satellite setup links and so on).
+
+   ```
+   cp satellite_common.yml satellite_common.local.yml
+   ```
 
 3. Make a copy of inventory from inventory.sample file. 
 

@@ -1,0 +1,4 @@
+---
+- hosts: sat63
+  roles:
+    - redhat_subscriptions

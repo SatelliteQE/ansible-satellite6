@@ -1,0 +1,10 @@
+---
+# Satellite 63
+satellite_version: "6.3"
+
+redhat_subscriptions_activation_key: "satellite-6.3.0-qa-rhel7"
+redhat_subscriptions_organization: "Sat6-CI"
+
+#  Satellite_63_Composes
+satellite6_repositories_satellite_reponame: "Satellite_63_RHEL7"
+satellite6_repositories_satellite_repourl: "{{ repository_url }}/pulp/repos/Sat6-CI/QA/Satellite_6_3_with_RHEL7_Server/custom/Satellite_6_3_Composes/Satellite_6_3_RHEL7"
