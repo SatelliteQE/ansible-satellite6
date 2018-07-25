@@ -1,0 +1,44 @@
+---
+# tasks file for satellite6_repositories
+- name: "Enable all the required repositories for Satellite6 Installation via CDN."
+  when: (satellite_distribution == "internal_repo") or
+        (satellite_distribution == "cdn")
+  rhsm_repository:
+    name: "{{ item }}"
+    state: enabled
+  with_items:
+     - "rhel-{{ ansible_distribution_major_version }}-server-rpms"
+     - "rhel-{{ ansible_distribution_major_version }}-server-optional-rpms"
+     - "rhel-{{ ansible_distribution_major_version }}-server-extras-rpms"
+     - "rhel-{{ ansible_distribution_major_version }}-server-ansible-2-rpms"
+     - "rhel-server-rhscl-{{ ansible_distribution_major_version }}-rpms"
+
+- block:
+  - name: "Enable Satellite-Maintenance repository via CDN."
+    rhsm_repository:
+      name: "rhel-{{ ansible_distribution_major_version }}-server-satellite-maintenance-6-rpms"
+      state: enabled
+
+  - name: "Enable Satellite6 repository via CDN."
+    rhsm_repository:
+      name: "rhel-{{ ansible_distribution_major_version }}-server-satellite-{{ satellite_version }}-rpms"
+      state: enabled
+  when:
+    - satellite_distribution == "cdn"
+
+- block:
+  - name: "Add Internal Satellite-Maintenance repository."
+    yum_repository:
+      name: "{{ satellite6_repositories_satellite_maintain_reponame }}"
+      description: "{{ satellite6_repositories_satellite_maintain_reponame }} repository"
+      baseurl: "{{ satellite6_repositories_satellite_maintain_repourl }}"
+      gpgcheck: no
+
+  - name: "Add Internal Satellite 6 repository."
+    yum_repository:
+      name: "{{ satellite6_repositories_satellite_reponame }}"
+      description: "{{ satellite6_repositories_satellite_reponame }} repository"
+      baseurl: "{{ satellite6_repositories_satellite_repourl }}"
+      gpgcheck: no
+  when:
+    - satellite_distribution == "internal_repo"

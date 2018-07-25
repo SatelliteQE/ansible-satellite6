@@ -1,0 +1,4 @@
+---
+# defaults file for redhat_subscriptions
+redhat_subscriptions_rhsm_username: user@redhat.com
+redhat_subscriptions_rhsm_password: fake_password
