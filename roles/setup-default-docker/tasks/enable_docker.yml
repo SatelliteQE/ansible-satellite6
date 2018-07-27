@@ -1,0 +1,32 @@
+---
+- block:
+  - name: "Edit docker sysconfig"
+    replace:
+      path: /etc/sysconfig/docker
+      regexp: '^OPTIONS=.*'
+      replace: "OPTIONS=\'--selinux-enabled=true --host tcp://0.0.0.0:2375 --host unix:///var/run/docker.sock -G docker\'"
+
+  - name: "Enable docker service"
+    systemd:
+      name: docker
+      enabled: yes
+  
+  - name: "Start docker service"
+    systemd:
+      name: docker
+      state: started
+  when: ansible_distribution_major_version >= "7"
+
+- block:
+  - name: "Edit docker sysconfig"
+    replace:
+      path: /etc/sysconfig/docker
+      regexp: '^other_args=.*'
+      replace: "other_args=\'--selinux-enabled=true --host tcp://0.0.0.0:2375 --host unix:///var/run/docker.sock -G docker\'"
+  
+  - name: "Enable docker service"
+    shell: chkconfig docker on
+  
+  - name: "Start docker service"
+    shell: service docker start
+  when: ansible_distribution_major_version < "7"

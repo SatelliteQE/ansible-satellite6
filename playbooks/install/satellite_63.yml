@@ -2,3 +2,4 @@
 - hosts: sat63
   roles:
     - partition-disk
+    - setup-default-docker
