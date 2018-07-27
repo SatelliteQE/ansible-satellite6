@@ -1,0 +1,8 @@
+---
+# tasks file for avahi
+- include_tasks: install_mdns.yml
+- include_tasks: enable_mdns_service.yml
+  when: ansible_distribution_major_version >= 7
+- include_tasks: add_mdns_service.yml
+  when: ansible_distribution_major_version < 7
+- include_tasks: restart_avahi.yml
