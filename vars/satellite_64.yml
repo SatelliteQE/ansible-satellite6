@@ -1,0 +1,10 @@
+---
+# Satellite 64
+satellite_version: "6.4"
+
+redhat_subscriptions_activation_key: "satellite-6.4.0-qa-rhel7"
+redhat_subscriptions_organization: "Sat6-CI"
+
+#  Satellite_64_Composes
+satellite6_repositories_satellite_reponame: "Satellite_64_RHEL7"
+satellite6_repositories_satellite_repourl: "{{ repository_url }}/pulp/repos/Sat6-CI/QA/Satellite_6_4_with_RHEL7_Server/custom/Satellite_6_4_Composes/Satellite_6_4_RHEL7"

@@ -1,0 +1,31 @@
+---
+redhat_subscriptions_rhsm_username: "user@redhat.com"
+redhat_subscriptions_rhsm_password: "updatethisvalue"
+
+# Pass the pool-id which would have all the below repos available.
+#
+# Below for example:
+# Satellite Employee Subscriptions brings in all below repos.
+
+# "rhel-7-server-rpms"
+# "rhel-7-server-satellite-maintenance-6-rpms"
+# "rhel-server-rhscl-7-rpms"
+# "rhel-7-server-satellite-6.x-rpms"
+
+# Employee SKU brings in the below repos.
+# "rhel-7-server-ansible-2-rpms"
+
+# Satellite Employee subscriptions for all other Product/Repos.
+redhat_subscriptions_rhsm_pool_id1: 8a85f981519abf020151a22d3c387f2a
+# Employee SKU for 'Red Hat Ansible Engine Product'.
+redhat_subscriptions_rhsm_pool_id2: 8a85f98960dbf6510160df23e3367451
+
+# Repository URL
+repository_url: "http://repository.example.com"
+
+# Valid values are, "internal_repo", "cdn", "internal_ak".
+satellite_distribution: "cdn"
+
+# Maintain URL
+satellite6_repositories_satellite_maintain_reponame: "Satellite6_Maintain_RHEL7"
+satellite6_repositories_satellite_maintain_repourl: "{{ repository_url }}/pulp/repos/Sat6-CI/QA/Satellite_Maintenance_RHEL7/custom/Satellite_Maintenance_Composes/Satellite_Maintenance_RHEL7/"
