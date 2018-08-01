@@ -1,0 +1,11 @@
+---
+- name: "Check if FIPS is enabled"
+  slurp:
+    src: '/proc/sys/crypto/fips_enabled'
+  register: fips
+
+- block:
+  - include_tasks: install_dracut.yml
+  - include_tasks: edit_kernel.yml
+  - include_tasks: reboot.yml
+  when: fips.content|b64decode|trim == "0"
