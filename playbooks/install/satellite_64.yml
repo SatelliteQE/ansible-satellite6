@@ -1,5 +1,11 @@
 ---
 - hosts: sat64
+  vars_files:
+    - ../../vars/satellite_common.local.yml
+    - ../../vars/satellite_64.yml
   roles:
     - partition-disk
-    - setup-default-docker
+    - redhat_subscriptions
+    - satellite6_repositories
+    - update_os_packages
+    - install_satellite6

@@ -1,0 +1,6 @@
+---
+# Tasks file for install_satellite6
+- name: Install the latest version of Satellite6
+  yum:
+    name: satellite
+    state: present

@@ -1,0 +1,7 @@
+---
+# tasks file for redhat_subscriptions
+- include_tasks: username_and_password.yml
+  when: (satellite_distribution == "internal_repo") or
+        (satellite_distribution == "cdn")
+- include_tasks: activation_key.yml
+  when: satellite_distribution == "internal_ak"

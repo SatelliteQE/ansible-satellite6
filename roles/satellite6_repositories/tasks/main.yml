@@ -1,0 +1,6 @@
+---
+# tasks file for redhat_subscriptions
+- include_tasks: disable_repositories.yml
+- include_tasks: enable_repositories.yml
+  when: (satellite_distribution == "internal_repo") or
+        (satellite_distribution == "cdn")

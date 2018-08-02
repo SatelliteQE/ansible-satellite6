@@ -1,0 +1,19 @@
+---
+# tasks file for satellite6_repositories
+- name: "Install yum-utils"
+  package:
+    name: yum-utils
+    state: present
+
+- name: Disable all RHSM repositories
+  when: (satellite_distribution == "internal_repo") or
+        (satellite_distribution == "cdn")
+  rhsm_repository:
+    name: '*'
+    state: disabled
+
+- name: "Disable all Beaker Repos"
+  when:
+    - ansible_distribution == "RedHat"
+    - ansible_distribution_major_version == "7"
+  command: yum-config-manager --disable "beaker*"

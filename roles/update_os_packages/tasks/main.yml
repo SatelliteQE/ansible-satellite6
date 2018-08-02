@@ -1,0 +1,18 @@
+---
+# tasks file for update_os_packages
+- name: yum clean all
+  command: 'yum clean all'
+
+- name: Update all installed packages before installing Satellite6
+  when:
+    - ansible_distribution == "RedHat"
+    - ansible_distribution_major_version == "7"
+  yum:
+    name: '*'
+    update_cache: yes
+    state: latest
+  tags:
+    - skip_ansible_lint
+
+# TODO, investigate reboot here and add.
+# https://github.com/SatelliteQE/ansible-satellite6/issues/8
