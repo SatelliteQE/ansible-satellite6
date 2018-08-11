@@ -1,0 +1,11 @@
+---
+- name: "Enable MDNS service"
+  firewalld:
+    service: mdns
+    permanent: true
+    state: enabled
+
+- name: "Reload firewall"
+  systemd:
+    name: firewalld
+    state: reloaded

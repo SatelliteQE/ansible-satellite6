@@ -1,0 +1,10 @@
+---
+- name: "Add MDNS service"
+  iptables:
+    chain: INPUT
+    destination: 224.0.0.251/32
+    protocol: udp
+    match: udp, conntrack
+    destination_port: 5353
+    ctstate: NEW
+    jump: ACCEPT

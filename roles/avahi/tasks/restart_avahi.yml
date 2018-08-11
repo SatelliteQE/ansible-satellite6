@@ -1,0 +1,10 @@
+---
+- name: "Restart dbus"
+  service:
+    name: dbus
+    state: restarted
+
+- name: "Restart Avahi"
+  service:
+    name: avahi-daemon
+    state: restarted
