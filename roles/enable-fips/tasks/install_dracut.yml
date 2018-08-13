@@ -1,0 +1,8 @@
+---
+- name: "Install dracut-fips"
+  package:
+    name: dracut-fips
+    state: present
+
+- name: "Run dracut"
+  command: dracut --force

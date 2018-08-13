@@ -1,0 +1,7 @@
+---
+- name: "Get boot_uuid"
+  command: 'findmnt -no uuid /boot'
+  register: uuid
+
+- name: "Edit kernel fips and boot arguments"
+  command: 'grubby --update-kernel=DEFAULT --args="fips=1 boot=UUID={{ uuid.stdout }}"'
