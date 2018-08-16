@@ -1,0 +1,6 @@
+---
+# Tasks file for install_katello
+- name: Install the latest version of Katello
+  yum:
+    name: katello
+    state: present

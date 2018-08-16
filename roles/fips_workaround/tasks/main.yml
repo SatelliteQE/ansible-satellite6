@@ -1,0 +1,11 @@
+---
+# tasks file for fips_workaround
+- name: "Download fips_workaround script"
+  get_url:
+    url: "{{ fips_script }}"
+    dest: ~/
+
+- name: "Run fips_workaround script"
+  command: bash ~/fips_workaround.sh
+  tags:
+  - skip_ansible_lint

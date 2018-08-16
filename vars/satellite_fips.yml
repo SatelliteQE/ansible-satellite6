@@ -1,0 +1,25 @@
+---
+# Red Hat Subscription Manager variables
+rhn_username: '{{ vars["redhat_subscriptions_rhsm_username"] }}'
+rhn_password: '{{ vars["redhat_subscriptions_rhsm_password"] }}'
+rhn_pool: '{{ vars["redhat_subscriptions_rhsm_pool_id1"] }}'
+
+# Pulp variables
+pulp_version: '2.16'
+pulp_build: 'nightly'
+
+# Foreman installer variables
+foreman_installer_scenario: satellite
+foreman_installer_command: satellite-installer
+foreman_installer_options_internal_use_only:
+- "--disable-system-checks"
+- "--foreman-admin-password {{ foreman_installer_admin_password }}"
+
+# Katello client server
+katello_client_server: "sat-r220-02.lab.eng.rdu2.redhat.com/"
+katello_client_organization: Sat6-CI
+katello_client_activationkey: "satellite-6.4.0-qa-rhel7"
+
+# Valid values are, "internal_repo", "cdn", "internal_ak". 
+# satellite_64_fips does not work for "internal_repo" and "cdn" distribution types
+satellite_distribution: "internal_ak"
