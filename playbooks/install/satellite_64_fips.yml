@@ -1,0 +1,21 @@
+---
+- hosts: sat64
+  vars_files:
+    - ../../vars/satellite_common.local.yml
+    - ../../vars/satellite_64.yml
+    - ../../vars/satellite_fips.yml
+  roles:
+    - pulp-fips
+    - satellite6_repositories
+    - puppet_repositories
+    - update_os_packages
+    - epel_repositories
+    - foreman_repositories
+    - katello_repositories
+    - install_katello
+    - katello_client
+    - partition-disk
+    - redhat_subscriptions
+    - install_satellite6
+    - fips_workaround
+    - foreman_installer

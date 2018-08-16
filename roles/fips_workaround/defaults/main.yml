@@ -1,0 +1,3 @@
+---
+# defaults file for fips_workaround
+fips_script: https://gist.githubusercontent.com/iNecas/8cd95a07ce1700068307020e2beb0441/raw/efaadad7c7b971f74d461b04e96a1d0ae45a403e/fips_workaround.sh

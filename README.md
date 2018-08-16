@@ -16,10 +16,11 @@ We also recommend to install yamllint, ansible-lint and ansible-review.
 
 Befor running any Satellite6 playbooks,
 
-1. Check and Install the roles from ansible galaxy, if any
+1. Check and Install dependent roles from ansible galaxy and [mazer](https://galaxy.ansible.com/docs/mazer/install.html), if any
 
    ```
    # ansible-galaxy install -r requirements.yml
+   # mazer install --namespace forklift git+https://github.com/theforeman/forklift
    ```
 
 2. Check and configure required variables in `satellite_common.local.yml`
