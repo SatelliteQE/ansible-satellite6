@@ -51,7 +51,7 @@ satellite_ports:
   - {proto: 'tcp', port: 5671}
   - {proto: 'tcp', port: 2375}
   - {proto: 'tcp', port: 5000}
-  - {proto: 'tcp', port: 16500}
+  - {proto: 'tcp', port: 16509}
 
 capsule_ports:
   - {proto: 'tcp', port: 53}
