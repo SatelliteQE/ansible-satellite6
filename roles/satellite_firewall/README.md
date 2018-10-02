@@ -45,7 +45,7 @@ This role is not dependent upon any galaxy roles.
 Example Playbook
 ----------------
 
-Here is a simple example of partitioning-disk role:
+Here is a simple example of satellite_firewall role:
 
 - hosts: localhost
   roles:
