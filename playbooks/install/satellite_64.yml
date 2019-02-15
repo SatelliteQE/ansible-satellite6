@@ -1,7 +1,8 @@
 ---
-- hosts: sat64
+- hosts: all
+  become: true
   vars_files:
-    - ../../vars/satellite_common.local.yml
+    - ../../vars/satellite_common.yml
     - ../../vars/satellite_64.yml
   roles:
     - partition-disk
