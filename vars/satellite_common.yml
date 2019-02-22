@@ -29,3 +29,31 @@ satellite_distribution: "cdn"
 # Maintain URL
 satellite6_repositories_satellite_maintain_reponame: "Satellite6_Maintain_RHEL7"
 satellite6_repositories_satellite_maintain_repourl: "{{ repository_url }}/pulp/repos/Sat6-CI/QA/Satellite_Maintenance_RHEL7/custom/Satellite_Maintenance_Composes/Satellite_Maintenance_RHEL7/"
+
+# Ports needed both by a Sat 6 server and by a Capsule server to be open
+# List of ports taken from https://github.com/SatelliteQE/automation-tools/blob/master/automation_tools/__init__.py#L623-L664
+# and from Satellite 6 documentation
+#(https://access.redhat.com/documentation/en-us/red_hat_satellite/6.3/html/installation_guide/preparing_your_environment_for_installation#ports_prerequisites)
+common_ports:
+  - {proto: 'tcp', port: 22}
+  - {proto: 'tcp', port: 80}
+  - {proto: 'tcp', port: 443}
+  - {proto: 'tcp', port: 5647}
+  - {proto: 'tcp', port: 8000}
+  - {proto: 'tcp', port: 8140}
+  - {proto: 'tcp', port: 8443}
+  - {proto: 'tcp', port: 9090}
+  - {proto: 'udp', port: 53}
+  - {proto: 'udp', port: 69}
+
+satellite_ports:
+  - {proto: 'tcp', port: 5646}
+  - {proto: 'tcp', port: 5671}
+  - {proto: 'tcp', port: 2375}
+  - {proto: 'tcp', port: 5000}
+  - {proto: 'tcp', port: 16509}
+
+capsule_ports:
+  - {proto: 'tcp', port: 53}
+  - {proto: 'udp', port: 67}
+  - {proto: 'udp', port: 68}

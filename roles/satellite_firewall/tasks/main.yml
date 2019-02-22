@@ -1,0 +1,37 @@
+---
+- name: Make sure the firewalld package is present
+  yum:
+    name: firewalld
+    state: present
+  when:
+    - ansible_distribution == "RedHat"
+    - ansible_distribution_major_version|int >= 7
+
+- name: Open Satellite ports using firewalld
+  firewalld:
+    port: "{{ item.port }}/{{ item.proto }}"
+    permanent: true
+    state: enabled
+    immediate: true
+  with_flattened:
+    - "{{ common_ports }}"
+    - "{{ satellite_ports }}"
+    - "{{ capsule_ports }}"
+  when:
+    - ansible_distribution == "RedHat"
+    - ansible_distribution_major_version|int >= 7
+
+- name: Open Satellite ports using iptables
+  iptables:
+    chain: INPUT
+    ctstate: NEW
+    destination_port: "{{ item.port }}"
+    protocol: "{{ item.proto }}"
+    jump: ACCEPT
+  with_flattened:
+    - "{{ common_ports }}"
+    - "{{ satellite_ports }}"
+    - "{{ capsule_ports }}"
+  when:
+    - ansible_distribution == "RedHat"
+    - ansible_distribution_major_version|int < 7
