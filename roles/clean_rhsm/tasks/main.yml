@@ -1,0 +1,38 @@
+---
+- name: "Erase existing Candlepin certs, if any."
+  yum:
+    name: katello-ca-consumer-*
+    state: absent
+
+- name: Erase katello-server-ca.pem
+  file:
+    path: /etc/rhsm/ca/katello-server-ca.pem
+    state: absent
+
+- name: "Change 'hostname' to 'subscription.rhsm.redhat.com'"
+  ini_file:
+    path: "{{ rhsm_conf }}"
+    section: server
+    option: hostname
+    value: subscription.rhsm.redhat.com
+
+- name: "Change 'prefix' to '/subscription'"
+  ini_file:
+    path: "{{ rhsm_conf }}"
+    section: server
+    option: prefix
+    value: /subscription
+
+- name: "Change baseurl to 'https://cdn.redhat.com'"
+  ini_file:
+    path: "{{ rhsm_conf }}"
+    section: rhsm
+    option: baseurl
+    value: https://cdn.redhat.com
+
+- name: "Change repo_ca_cert to '%(ca_cert_dir)sredhat-uep.pem'"
+  ini_file:
+    path: "{{ rhsm_conf }}"
+    section: rhsm
+    option: repo_ca_cert
+    value: "%(ca_cert_dir)sredhat-uep.pem"
