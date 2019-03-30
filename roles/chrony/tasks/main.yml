@@ -1,0 +1,10 @@
+---
+# tasks file for chrony
+- name: Install libselinux-python
+  yum:
+    name: libselinux-python
+    state: present
+
+- name: Configure chrony
+  include_role:
+    name: oasis-roles.chrony
