@@ -1,0 +1,39 @@
+---
+- block:
+  - name: "Edit docker sysconfig"
+    replace:
+      path: /etc/sysconfig/docker
+      regexp: '^OPTIONS=.*'
+      replace: "OPTIONS='--selinux-enabled=true --host tcp://0.0.0.0:2375 --host unix:///var/run/docker.sock -G docker'"
+
+  - name: "Enable docker service"
+    systemd:
+      name: docker
+      enabled: true
+
+  - name: "Start docker service"
+    systemd:
+      name: docker
+      state: started
+  when: ansible_distribution_major_version >= "7"
+
+- block:
+  - name: "Install libselinux-python"
+    yum:
+      name: http://mirror.centos.org/centos/6/os/x86_64/Packages/libselinux-python-2.0.94-7.el6.x86_64.rpm
+      state: present
+
+  - name: "Edit docker sysconfig"
+    replace:
+      path: /etc/sysconfig/docker
+      regexp: '^other_args=.*'
+      replace: "other_args='--selinux-enabled=true --host tcp://0.0.0.0:2375 --host unix:///var/run/docker.sock -G docker'"
+
+  - name: "Turn on docker service"
+    shell: chkconfig docker on
+
+  - name: "Start docker service"
+    service:
+      name: docker
+      state: started
+  when: ansible_distribution_major_version < "7"

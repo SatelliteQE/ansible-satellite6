@@ -1,0 +1,12 @@
+---
+- name: "Create docker group"
+  group:
+    name: docker
+    state: present
+    local: yes
+
+- name: "Add foreman user to docker group"
+  user:
+    name: foreman
+    append: yes
+    groups: docker

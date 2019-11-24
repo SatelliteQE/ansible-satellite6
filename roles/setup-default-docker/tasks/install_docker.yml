@@ -1,0 +1,40 @@
+---
+- block:
+  - name: "Enable extra rpms repo"
+    rhsm_repository:
+      name: rhel-{{ansible_distribution_major_version}}-server-extras-rpms
+      state: enabled
+
+  - name: "Install Docker"
+    yum:
+      name: docker
+      state: present
+  
+  - name: "Enable Docker service"
+    systemd:
+      name: docker.service
+      enabled: true
+
+  - name: "Disable extra rpms repo"
+    rhsm_repository:
+      name: rhel-{{ansible_distribution_major_version}}-server-extras-rpms
+      state: disabled
+  when: ansible_distribution_major_version >= "7"
+
+- block:
+  - name: "Install epel-release repo"
+    yum:
+      name: http://mirror.pnl.gov/epel/6/x86_64/epel-release-6-8.noarch.rpm
+      state: present
+      validate_certs: yes
+
+  - name: "Install docker"
+    yum:
+      name: docker-io
+      state: present
+  
+  - name: "Remove epel-release repo"
+    yum:
+      name: epel-release.noarch
+      state: removed
+  when: ansible_distribution_major_version < "7"
